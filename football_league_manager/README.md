@@ -21,6 +21,15 @@ For now, let me understand what a great directory organization would look like
 
 - admin mysql: root / admin1234.
 
+Unix Bash (Linux, Mac, etc.):
+
+$ export FLASK_APP=hello
+$ flask run
+Windows CMD:
+
+> set FLASK_APP=hello
+> flask run
+
 /*** 
 
 /football_league_manager

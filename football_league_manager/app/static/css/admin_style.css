@@ -1,0 +1,86 @@
+/* static/css/admin_style.css */
+.header {
+    background-color: #0052cc; /* Adjust if your blue is different */
+    padding: 20px;
+    text-align: center;
+    color: white;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.logo {
+    width: 100px; /* Adjust based on your actual logo size */
+}
+
+/* static/css/admin_style.css */
+
+.admin-menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #333;
+    overflow: hidden;
+}
+
+.admin-menu li {
+    float: left;
+    overflow: hidden;
+}
+
+.admin-menu li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Add hover effect for menu items */
+.admin-menu li a:hover {
+    background-color: #555;
+}
+
+/* Dropdown Content (hidden by default) */
+.admin-menu li .dropdown {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Show the dropdown menu on hover */
+.admin-menu li:hover .dropdown {
+    display: block;
+}
+
+/* Dropdown links styles */
+.admin-menu .dropdown li {
+    float: none;
+    display: block;
+}
+
+.admin-menu .dropdown li a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+/* Change color of dropdown links on hover */
+.admin-menu .dropdown li a:hover {
+    background-color: #444;
+}
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}

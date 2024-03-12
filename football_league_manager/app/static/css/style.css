@@ -1,0 +1,69 @@
+/* static/css/style.css */
+
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.header {
+    background-color: #0052cc;
+    padding: 50px;
+    text-align: center;
+    position: relative; /* Ensure this is relative if you want to position children inside it */
+    z-index: 1; /* Lower z-index than the form */
+}
+
+.logo {
+    width: 450px; /* Adjust based on the size of your logo */
+    margin-bottom: 20px;
+}
+
+.login-form {
+    top: 80%;
+    left: 35%;
+    /*#transform: translate(-50%, -50%);*/
+    background-color: #333;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    margin-top: 200px; /* Adjust based on your layout */
+    text-align: center;
+    position: absolute; /* Or 'absolute' if you're positioning it specifically */
+    z-index: 2; /* Higher z-index means it will be on top, reduce this if you want it behind other content */
+}
+
+input[type=text], input[type=password] {
+    width: 95%;
+    padding: 10px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+button:hover {
+    opacity:1;
+}
