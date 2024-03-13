@@ -21,14 +21,25 @@ For now, let me understand what a great directory organization would look like
 
 - admin mysql: root / admin1234.
 
+git pull origin main
+
 Unix Bash (Linux, Mac, etc.):
 
-$ export FLASK_APP=hello
-$ flask run
-Windows CMD:
+$ export FLASK_APP=hello //windows
 
-> set FLASK_APP=hello
-> flask run
+
+eval "$(starship init bash)"
+
+set FLASK_APP=app
+flask run
+
+flask db upgrade
+
+sudo pkill mysqld
+cd .mysql
+mysqld
+
+
 
 /*** 
 

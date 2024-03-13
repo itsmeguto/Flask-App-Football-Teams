@@ -1,19 +1,24 @@
-<!-- templates/manage_leagues.html -->
+{% extends "base.html" %}
+
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Your head content -->
+    <!-- Head content including FontAwesome link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
 <body>
-    <!-- Your body content -->
-    <div class="league-table">
-        <table>
+    <div class="header">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="System Logo" class="logo">
+        <h1>Manage Leagues</h1>
+    </div>
+    <div class="content">
+        <table class="beautiful-table">
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>Country</th>
-                    <th>Foundation Year</th>
-                    <th>Number of Teams</th>
+                    <!-- Other headers -->
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -37,9 +42,12 @@
                         {% endif %}
                     </td>
                     <td>
-                        <a href="{{ url_for('main.edit_league', id=league.id) }}">Edit</a>
-                        <a href="{{ url_for('delete_league', id=league.id) }}" onclick="return confirm('Are you sure?');">Delete</a>
-                        
+                        <a href="{{ url_for('main.update_league', league_id=league.id) }}" title="Edit">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="{{ url_for('main.delete_league', league_id=league.id) }}" class="delete-btn" onclick="return confirm('Are you sure?');" title="Delete">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
                     </td>
                 </tr>
                 {% endfor %}
@@ -48,3 +56,4 @@
     </div>
 </body>
 </html>
+{% endblock %}

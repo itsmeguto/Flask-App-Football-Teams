@@ -7,7 +7,7 @@
 }
 
 
-body {
+.body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
@@ -83,4 +83,83 @@ body {
     content: "";
     display: table;
     clear: both;
+}
+
+
+.content {
+    padding: 20px;
+}
+
+.beautiful-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.beautiful-table th, .beautiful-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.beautiful-table th {
+    background-color: #007bff;
+    color: white;
+}
+
+.beautiful-table tr:nth-child(even){background-color: #f2f2f2;}
+
+.beautiful-table tr:hover {background-color: #ddd;}
+
+.beautiful-table td a {
+    display: inline-block;
+    margin: 5px;
+    color: #007bff; /* Or another color that fits your design */
+}
+
+.beautiful-table .delete-btn {
+    color: #ff6347; /* Or another color to signify delete, like red */
+}
+
+.fas {
+    margin-right: 5px;
+}
+
+.beautiful-form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* Make sure input fields do not overflow their container */
+}
+
+.btn-submit {
+    background-color: #0052cc;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-submit:hover {
+    background-color: #003d99;
 }
