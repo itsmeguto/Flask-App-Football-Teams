@@ -13,16 +13,72 @@
 <body>
     <div class="header">
         <img src="{{ url_for('static', filename='images/logo.png') }}" alt="System Logo" class="logo">
-        <h1>Edit League</h1>
+        <h1>Welcome to the Football League Manager!</h1>
+    </div>
+    <div class="admin-menu">
+        <ul>
+            <li><a href="#">Leagues</a>
+                <ul class="dropdown">
+                    <li><a href="{{ url_for('main.manage_leagues') }}">Manage Leagues</a></li>
+                    <li><a href="{{ url_for('main.create_league') }}">Add New League</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Teams</a>
+                <ul class="dropdown">
+                    <li><a href="#">Manage Teams</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Profiles</a>
+                <ul class="dropdown">
+                    <li><a href="#">Manage Profiles</a></li>
+                </ul>
+            </li>     
+        </ul>
     </div>
     <div class="content">
         <form action="{{ url_for('main.update_league', league_id=league.id) }}" method="POST" class="beautiful-form">
             <!-- Add form fields -->
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <div class="form-group">
                 <label for="name">League Name:</label>
                 <input type="text" id="name" name="name" value="{{ league.name }}" required>
             </div>
-            <!-- Add more fields as necessary -->
+            <div class="form-group">
+                <label for="name">Country:</label>
+                <input type="text" id="country" name="country" value="{{ league.country }}" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Date of Foundation:</label>
+                <input type="date" id="date_of_foundation" name="date_of_foundation" value="{{ league.date_of_foundation}}" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Number of Teams:</label>
+                <input type="number" id="number_of_teams" name="number_of_teams" value="{{ league.number_of_teams }}" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Level on Pyramid:</label>
+                <input type="text" id="level_on_pyramid" name="level_on_pyramid" value="{{ league.level_on_pyramid}}" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Current Champion:</label>
+                <input type="text" id="current_champion" name="current_champion" value="{{ league.current_champion}}" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Most Champions:</label>
+                <input type="text" id="most_champions" name="most_champions" value="{{ league.most_champions}}" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Most Appearances:</label>
+                <input type="text" id="most_appearances" name="most_appearances" value="{{ league.most_appearances }}" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Top Scorer:</label>
+                <input type="text" id="top_scorer" name="top_scorer" value="{{ league.top_scorer}}" required>
+            </div>
+            <div class="form-group">
+                <label for="name">League Logo Path (starting from /static/):</label>
+                <input type="text" id="logo" name="logo" value="{{ league.logo }}" required>
+            </div>
             <button type="submit" class="btn-submit">Update League</button>
         </form>
     </div>

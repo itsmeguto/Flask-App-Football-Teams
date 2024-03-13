@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New League</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_style.css') }}">
+    <!-- Include FontAwesome for icons if needed -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+<div class="header">
+    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="System Logo" class="logo">
+    <h1>Welcome to the Football League Manager!</h1>
+</div>
+<div class="admin-menu">
+    <ul>
+        <li><a href="#">Leagues</a>
+            <ul class="dropdown">
+                <li><a href="{{ url_for('main.manage_leagues') }}">Manage Leagues</a></li>
+                <li><a href="{{ url_for('main.create_league') }}">Add New League</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Teams</a>
+            <ul class="dropdown">
+                <li><a href="#">Manage Teams</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Profiles</a>
+            <ul class="dropdown">
+                <li><a href="#">Manage Profiles</a></li>
+            </ul>
+        </li>     
+    </ul>
+</div>
+<div class="container">
+    <h2>Create New League</h2>
+    <form method="POST" action="{{ url_for('main.create_league') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <div class="form-group">
+            <label for="name">League Name:</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="country">Country:</label>
+            <input type="text" class="form-control" id="country" name="country" required>
+        </div>
+        <div class="form-group">
+            <label for="date_of_foundation">Date of Foundation</label>
+            <input type="date" class="form-control" id="date_of_foundation" name="date_of_foundation" required>
+        </div>
+        <div class="form-group">
+            <label for="number_of_teams">Number of Teams:</label>
+            <input type="number" class="form-control" id="number_of_teams" name="number_of_teams" required>
+        </div>
+        <div class="form-group">
+            <label for="level_on_pyramid">Level On Pyramid:</label>
+            <input type="number" class="form-control" id="level_on_pyramid" name="level_on_pyramid" required>
+        </div>
+        <div class="form-group">
+            <label for="current_champion">Current Champion:</label>
+            <input type="text" class="form-control" id="current_champion" name="current_champion" required>
+        </div>
+        <div class="form-group">
+            <label for="most_champions">Most Champions:</label>
+            <input type="text" class="form-control" id="most_champions" name="most_champions" required>
+        </div>
+        <div class="form-group">
+            <label for="most_appearances">Most Appearances:</label>
+            <input type="text" class="form-control" id="most_appearances" name="most_appearances" required>
+        </div>
+        <div class="form-group">
+            <label for="top_scorer">Top Scorer:</label>
+            <input type="text" class="form-control" id="top_scorer" name="top_scorer" required>
+        </div>
+        <div class="form-group">
+            <label for="logo">Logo Path (from /static/):</label>
+            <input type="text" class="form-control" id="logo" name="logo" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</body>
+</html>
+{% endblock %}

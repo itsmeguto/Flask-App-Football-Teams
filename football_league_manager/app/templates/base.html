@@ -5,11 +5,12 @@
     <!-- Head content: meta tags, title, link to CSS files -->
 </head>
 <body>
+    
     <!-- Flash messages section -->
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}
-                <div class="alert alert-{{ category }}">{{ message }}</div>
+                <div class="flash flash-{{ category }}">{{ message }}</div>
             {% endfor %}
         {% endif %}
     {% endwith %}
@@ -18,5 +19,33 @@
     {% block content %}{% endblock %}
 
     <!-- Footer, scripts, etc -->
+
+    {% if current_user.is_authenticated and current_user.role == 'admin' %}
+        <div class="header">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="System Logo" class="logo">
+            <h1>Welcome to the Football League Manager!</h1>
+        </div>
+        <div class="admin-menu">
+            <ul>
+                <li><a href="#">Leagues</a>
+                    <ul class="dropdown">
+                        <li><a href="{{ url_for('main.manage_leagues') }}">Manage Leagues</a></li>
+                        <li><a href="{{ url_for('main.create_league') }}">Add New League</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Teams</a>
+                    <ul class="dropdown">
+                        <li><a href="#">Manage Teams</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Profiles</a>
+                    <ul class="dropdown">
+                        <li><a href="#">Manage Profiles</a></li>
+                    </ul>
+                </li>     
+            </ul>
+        </div>
+    {% endif %}
+
 </body>
 </html>

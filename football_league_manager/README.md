@@ -15,6 +15,9 @@ For now, let me understand what a great directory organization would look like
 - Important to create venv
     - Root project folder - execute following cmd:
         - source .venv/bin/activate
+        powershell -
+            Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+            .\venv\Scripts\Activate.ps1 (in root of project)
     - requirements.txt (root)
         - pip3 install -r ./requirements.txt
 - Issue could be related to environment so we decided to write into parquet type;
