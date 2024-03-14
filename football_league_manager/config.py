@@ -12,3 +12,8 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Add any other configuration variables here
+
+class TestConfig(Config):
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'mysql+pymysql://root:admin1234.@localhost/football_manager'
+    WTF_CSRF_ENABLED = False  # Disable CSRF forms protection in testing
