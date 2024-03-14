@@ -32,6 +32,7 @@ $ export FLASK_APP=hello //windows
 
 
 eval "$(starship init bash)"
+Invoke-Expression (&starship init powershell)
 
 set FLASK_APP=app
 flask run
