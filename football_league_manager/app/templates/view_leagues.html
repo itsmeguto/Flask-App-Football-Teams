@@ -5,8 +5,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Manage League</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_style.css') }}">
+    <title>View League</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <!-- Include FontAwesome for icons if needed -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -24,22 +23,11 @@
         <img src="{{ url_for('static', filename='images/logo.png') }}" alt="System Logo" class="logo">
         <h1>Welcome to the Football League Manager!</h1>
     </div>
-    <div class="admin-menu">
+    <div class="viewer-menu">
         <ul>
             <li><a href="#">Leagues</a>
                 <ul class="dropdown">
-                    <li><a href="{{ url_for('main.manage_leagues') }}">Manage Leagues</a></li>
-                    <li><a href="{{ url_for('main.create_league') }}">Add New League</a></li>
-                </ul>
-            </li>
-            <li><a href="#">Teams</a>
-                <ul class="dropdown">
-                    <li><a href="#">Manage Teams</a></li>
-                </ul>
-            </li>
-            <li><a href="#">Profiles</a>
-                <ul class="dropdown">
-                    <li><a href="#">Manage Profiles</a></li>
+                    <li><a href="{{ url_for('main.view_leagues') }}">View Leagues</a></li>
                 </ul>
             </li>
             {% if current_user.is_authenticated %}
@@ -67,7 +55,6 @@
                     <th>Top Scorer</th>
                     <th>Logo</th>
                     <!-- Other headers -->
-                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -88,14 +75,6 @@
                         {% else %}
                             No Logo
                         {% endif %}
-                    </td>
-                    <td>
-                        <a href="{{ url_for('main.update_league', league_id=league.id) }}" title="Edit">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        <a href="{{ url_for('main.delete_league', league_id=league.id) }}" class="delete-btn" onclick="return confirm('Are you sure?');" title="Delete">
-                            <i class="fas fa-trash-alt"></i>
-                        </a>
                     </td>
                 </tr>
                 {% endfor %}

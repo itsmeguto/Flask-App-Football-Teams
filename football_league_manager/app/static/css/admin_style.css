@@ -163,3 +163,14 @@
 .btn-submit:hover {
     background-color: #003d99;
 }
+
+.logout-button {
+    background-color: red; /* Red background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Some padding */
+    margin: 10px 0; /* Some margin */
+    border: none; /* No borders */
+    cursor: pointer; /* Pointer/hand icon */
+    float: right; /* Float the button to the right */
+    margin-right: 10px; /* Extra space from the right edge */
+}

@@ -11,6 +11,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
+    <!-- Flash messages section -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash flash-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
 <div class="header">
     <img src="{{ url_for('static', filename='images/logo.png') }}" alt="System Logo" class="logo">
     <h1>Welcome to the Football League Manager!</h1>
@@ -32,7 +40,15 @@
             <ul class="dropdown">
                 <li><a href="#">Manage Profiles</a></li>
             </ul>
-        </li>     
+        </li>
+        {% if current_user.is_authenticated %}
+            <li>
+                <form action="{{ url_for('auth.logout') }}" method="post" style="float: right;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="logout-button">Logout</button>
+                </form>
+            </li>
+        {% endif %}     
     </ul>
 </div>
 <div class="container">

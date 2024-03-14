@@ -1,51 +1,45 @@
 <!-- templates/base.html -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <!-- Head content: meta tags, title, link to CSS files -->
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Football Manager</title>
+        <style>
+            .logout-button {
+                background-color: red; /* Red background */
+                color: white; /* White text */
+                padding: 10px 20px; /* Some padding */
+                margin: 10px 0; /* Some margin */
+                border: none; /* No borders */
+                cursor: pointer; /* Pointer/hand icon */
+                float: right; /* Float the button to the right */
+                margin-right: 10px; /* Extra space from the right edge */
+            }
+    
+            .header {
+                /* Ensure your header container extends full width */
+                width: 100%;
+                display: block;
+                clear: both; /* Clear floats */
+            }
+    
+            /* Additional styles for your header */
+        </style>
+    </head>
 <body>
     
-    <!-- Flash messages section -->
+    <!-- Flash messages section-->
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}
                 <div class="flash flash-{{ category }}">{{ message }}</div>
             {% endfor %}
         {% endif %}
-    {% endwith %}
+    {% endwith %} 
 
     <!-- Page-specific content will go here -->
     {% block content %}{% endblock %}
 
     <!-- Footer, scripts, etc -->
-
-    {% if current_user.is_authenticated and current_user.role == 'admin' %}
-        <div class="header">
-            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="System Logo" class="logo">
-            <h1>Welcome to the Football League Manager!</h1>
-        </div>
-        <div class="admin-menu">
-            <ul>
-                <li><a href="#">Leagues</a>
-                    <ul class="dropdown">
-                        <li><a href="{{ url_for('main.manage_leagues') }}">Manage Leagues</a></li>
-                        <li><a href="{{ url_for('main.create_league') }}">Add New League</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Teams</a>
-                    <ul class="dropdown">
-                        <li><a href="#">Manage Teams</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Profiles</a>
-                    <ul class="dropdown">
-                        <li><a href="#">Manage Profiles</a></li>
-                    </ul>
-                </li>     
-            </ul>
-        </div>
-    {% endif %}
-
 </body>
 </html>

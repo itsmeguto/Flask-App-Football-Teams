@@ -1,9 +1,9 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request, abort
 from flask_login import current_user, login_required, login_user,logout_user
-from app import db
 from app import create_app
 from app.models.leagues import League
-from app.models.users import Users
+from app.models.users import User
+from app.extensions import db
 from werkzeug.security import check_password_hash
 from flask_wtf.csrf import generate_csrf
 
@@ -13,17 +13,34 @@ main = Blueprint('main', __name__)
 
 # Define the route for the home page
 @main.route('/')
-def home():
+def index():
     return render_template('home.html')
 
 @main.route('/home_admin')
+@login_required
 def home_admin():
+    # Make sure only admins can access this page
+    if current_user.role != 'admin':
+        abort(403)  # Forbidden
     return render_template('home_admin.html')
+
+@main.route('/home_viewer')
+@login_required
+def home_viewer():
+    # Make sure only viewers can access this page
+    if current_user.role != 'viewer':
+        abort(403)  # Forbidden
+    return render_template('home_viewer.html')
 
 @main.route('/manage_leagues')
 def manage_leagues():
     leagues = League.query.all()
     return render_template('manage_leagues.html', leagues=leagues)
+
+@main.route('/view_leagues')
+def view_leagues():
+    leagues = League.query.all()
+    return render_template('view_leagues.html', leagues=leagues)
 
 @main.route('/update_league/<int:league_id>', methods=['GET', 'POST'])
 def update_league(league_id):
@@ -86,31 +103,3 @@ def admin():
     if current_user.role != 'admin':
         abort(403)  # Forbidden access
     return render_template('home_admin.html')
-
-
-@main.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        user = Users.query.filter_by(username=username).first()
-
-        if user and check_password_hash(user.password_hash, password):
-            login_user(user)
-            if user.role == "admin":
-                return redirect(url_for('main.home_admin'))  # Or wherever you want to redirect after login
-            else:
-                return redirect(url_for('main.home'))  # Or wherever you want to redirect after login
-        else:
-            flash('Invalid username or password.')
-
-    # If GET request or login failed
-    return render_template('index', csrf_token=generate_csrf())  # Render the home page again if login failed
-
-
-
-@main.route('/logout')
-def logout():
-    logout_user()
-    flash('You have been logged out.', 'info')
-    return redirect(url_for('main.index'))

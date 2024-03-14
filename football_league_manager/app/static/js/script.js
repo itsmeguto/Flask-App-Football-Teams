@@ -4,8 +4,8 @@ document.addEventListener("DOMContentLoaded", function() {
     console.log("The page is fully loaded.");
 
     // Display a welcome message
-    const welcomeMessage = "Welcome to the Football League Manager!";
-    alert(welcomeMessage);
+    // const welcomeMessage = "Welcome to the Football League Manager!";
+    // alert(welcomeMessage);
 
     // Example function to validate the login form (assuming you have one)
     const validateLoginForm = () => {

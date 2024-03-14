@@ -1,9 +1,8 @@
-from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
-
 from flask_login import UserMixin
+from app import db
 
-class Users(UserMixin, db.Model):  # Make sure to inherit from UserMixin!
+class User(UserMixin, db.Model):  # Make sure to inherit from UserMixin!
     __tablename__ = 'users'
     
     id = db.Column(db.Integer, primary_key=True)
