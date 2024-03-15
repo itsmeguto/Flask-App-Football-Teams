@@ -1,4 +1,4 @@
-from app import db
+from football_league_manager.app import db
 
 class Team(db.Model):
     id = db.Column(db.Integer, primary_key=True)

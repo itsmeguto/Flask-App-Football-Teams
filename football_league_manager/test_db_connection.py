@@ -1,6 +1,6 @@
 # test_db_connection.py
 
-from app import create_app, db
+from football_league_manager.app import create_app, db
 
 app = create_app()
 # We push an application context to tie our database operations to our app
