@@ -3,49 +3,118 @@
 {% block content %}
 <div class="content">
     <form action="{{ url_for('main.update_league', league_id=league.id) }}" method="POST" class="beautiful-form">
-        <!-- Add form fields -->
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        {{ form.hidden_tag() }}
         <div class="form-group">
-            <label for="name">League Name:</label>
-            <input type="text" id="name" name="name" value="{{ league.name }}" required>
+            {{ form.name.label(class="form-label") }}
+            {{ form.name(class="form-control", id="name") }}
+            {% if form.name.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.name.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="name">Country:</label>
-            <input type="text" id="country" name="country" value="{{ league.country }}" required>
+            {{ form.country.label(class="form-label") }}
+            {{ form.country(class="form-control", id="country") }}
+            {% if form.country.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.country.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="name">Date of Foundation:</label>
-            <input type="date" id="date_of_foundation" name="date_of_foundation" value="{{ league.date_of_foundation}}" required>
+            {{ form.date_of_foundation.label(class="form-label") }}
+            {{ form.date_of_foundation(class="form-control", id="date_of_foundation") }}
+            {% if form.date_of_foundation.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.date_of_foundation.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="name">Number of Teams:</label>
-            <input type="number" id="number_of_teams" name="number_of_teams" value="{{ league.number_of_teams }}" required>
+            {{ form.number_of_teams.label(class="form-label") }}
+            {{ form.number_of_teams(class="form-control", id="number_of_teams") }}
+            {% if form.number_of_teams.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.number_of_teams.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="name">Level on Pyramid:</label>
-            <input type="text" id="level_on_pyramid" name="level_on_pyramid" value="{{ league.level_on_pyramid}}" required>
+            {{ form.level_on_pyramid.label(class="form-label") }}
+            {{ form.level_on_pyramid(class="form-control", id="level_on_pyramid") }}
+            {% if form.level_on_pyramid.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.level_on_pyramid.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="name">Current Champion:</label>
-            <input type="text" id="current_champion" name="current_champion" value="{{ league.current_champion}}" required>
+            {{ form.current_champion.label(class="form-label") }}
+            {{ form.current_champion(class="form-control", id="current_champion") }}
+            {% if form.current_champion.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.current_champion.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="name">Most Champions:</label>
-            <input type="text" id="most_champions" name="most_champions" value="{{ league.most_champions}}" required>
+            {{ form.most_champions.label(class="form-label") }}
+            {{ form.most_champions(class="form-control", id="most_champions") }}
+            {% if form.most_champions.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.most_champions.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="name">Most Appearances:</label>
-            <input type="text" id="most_appearances" name="most_appearances" value="{{ league.most_appearances }}" required>
+            {{ form.most_appearances.label(class="form-label") }}
+            {{ form.most_appearances(class="form-control", id="most_appearances") }}
+            {% if form.most_appearances.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.most_appearances.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="name">Top Scorer:</label>
-            <input type="text" id="top_scorer" name="top_scorer" value="{{ league.top_scorer}}" required>
+            {{ form.top_scorer.label(class="form-label") }}
+            {{ form.top_scorer(class="form-control", id="top_scorer") }}
+            {% if form.top_scorer.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.top_scorer.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="name">League Logo Path (starting from /static/):</label>
-            <input type="text" id="logo" name="logo" value="{{ league.logo }}" required>
+            {{ form.logo.label(class="form-label") }}
+            {{ form.logo(class="form-control", id="logo") }}
+            {% if form.logo.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.logo.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
-        <button type="submit" class="btn-submit">Update League</button>
+        <button type="submit" class="btn btn-primary">Update League</button>
     </form>
 </div>
 {% endblock %}

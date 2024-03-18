@@ -1,11 +1,13 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request, abort
 from flask_login import current_user, login_required, login_user,logout_user
+from werkzeug.security import check_password_hash
+from flask_wtf.csrf import generate_csrf
 from app import create_app
 from app.models.leagues import League
 from app.models.users import User
 from app.extensions import db
-from werkzeug.security import check_password_hash
-from flask_wtf.csrf import generate_csrf
+from app.forms.forms import LeagueForm
+
 
 
 # Create a Blueprint instance
@@ -41,21 +43,6 @@ def manage_leagues():
 def view_leagues():
     leagues = League.query.all()
     return render_template('view_leagues.html', leagues=leagues)
-
-@main.route('/update_league/<int:league_id>', methods=['GET', 'POST'])
-def update_league(league_id):
-    league = League.query.get_or_404(league_id)
-    if request.method == 'POST':
-        # Process the submitted form data
-        league.name = request.form['name']
-        # Update other league fields based on the form data
-        db.session.commit()
-        flash('League updated successfully.', 'success')
-        return redirect(url_for('main.manage_leagues'))
-    else:
-        # GET request: render the form to edit the league
-        return render_template('edit_league.html', league=league)
-
 
 @main.route('/delete_league/<int:league_id>')
 def delete_league(league_id):
@@ -95,6 +82,45 @@ def create_league():
 
     # GET request: just render the template
     return render_template('create_league.html')
+
+@main.route('/update_league/<int:league_id>', methods=['GET', 'POST'])
+def update_league(league_id):
+    league_to_update = League.query.get_or_404(league_id)
+    form = LeagueForm()
+
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            # Update league with form data
+            league_to_update.name = form.name.data
+            league_to_update.country = form.country.data
+            league_to_update.number_of_teams = form.number_of_teams.data
+            league_to_update.date_of_foundation = form.date_of_foundation.data
+            league_to_update.level_on_pyramid = form.level_on_pyramid.data
+            league_to_update.current_champion = form.current_champion.data
+            league_to_update.most_champions = form.most_champions.data
+            league_to_update.most_appearances = form.most_appearances.data
+            league_to_update.top_scorer = form.top_scorer.data
+            league_to_update.logo = form.logo.data
+
+            db.session.commit()
+            flash('League successfully updated.', 'success')
+            return redirect(url_for('main.manage_leagues'))
+        else:
+            flash('Error updating league. Please check your input.', 'danger')
+    elif request.method == 'GET':
+        # Pre-populate form with existing league data
+        form.name.data = league_to_update.name
+        form.country.data = league_to_update.country
+        form.number_of_teams.data = league_to_update.number_of_teams
+        form.date_of_foundation.data = league_to_update.date_of_foundation
+        form.level_on_pyramid.data = league_to_update.level_on_pyramid
+        form.current_champion.data = league_to_update.current_champion
+        form.most_champions.data = league_to_update.most_champions
+        form.most_appearances.data = league_to_update.most_appearances
+        form.top_scorer.data = league_to_update.top_scorer
+        form.logo.data = league_to_update.logo
+
+    return render_template('edit_league.html', form=form, league=league_to_update)
 
 
 @main.route('/admin')
