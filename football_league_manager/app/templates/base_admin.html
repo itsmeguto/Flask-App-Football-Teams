@@ -31,6 +31,7 @@
         </style>
     </head>
 <body>
+    
     <!-- Flash messages section-->
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
@@ -43,7 +44,37 @@
         <img src="{{ url_for('static', filename='images/logo.png') }}" alt="System Logo" class="logo">
         <h1>Welcome to the Football League Manager!</h1>
     </div>
-        <!-- Page-specific content will go here -->
-        {% block content %}{% endblock %}
+    <div class="admin-menu">
+        <ul>
+            <li><a href="#">Leagues</a>
+                <ul class="dropdown">
+                    <li><a href="{{ url_for('main.manage_leagues') }}">Manage Leagues</a></li>
+                    <li><a href="{{ url_for('main.create_league') }}">Add New League</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Teams</a>
+                <ul class="dropdown">
+                    <li><a href="#">Manage Teams</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Profiles</a>
+                <ul class="dropdown">
+                    <li><a href="#">Manage Profiles</a></li>
+                </ul>
+            </li>
+            {% if current_user.is_authenticated %}
+                <li>
+                    <form action="{{ url_for('auth.logout') }}" method="post" style="float: right;">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button type="submit" class="logout-button">Logout</button>
+                    </form>
+                </li>
+            {% endif %}     
+        </ul>
+    </div>
+    <!-- Page-specific content will go here -->
+    {% block content %}{% endblock %}
+
+    <!-- Footer, scripts, etc -->
 </body>
 </html>

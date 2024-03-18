@@ -26,8 +26,8 @@ body, html {
 }
 
 .login-form {
-    top: 80%;
-    left: 35%;
+    top: 50%;
+    left: 40%;
     /*#transform: translate(-50%, -50%);*/
     background-color: #333;
     border-radius: 5px;

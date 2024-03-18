@@ -1,6 +1,8 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from football_league_manager.app import db
+#from football_league_manager.app import db
+from app.extensions import db
+
 
 class User(UserMixin, db.Model):  # Make sure to inherit from UserMixin!
     __tablename__ = 'users'

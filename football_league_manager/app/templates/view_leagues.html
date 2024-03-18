@@ -1,28 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>View League</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <!-- Include FontAwesome for icons if needed -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-</head>
-<body>
-    <!-- Flash messages section -->
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-                <div class="flash flash-{{ category }}">{{ message }}</div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
-    <div class="header">
-        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="System Logo" class="logo">
-        <h1>Welcome to the Football League Manager!</h1>
-    </div>
     <div class="viewer-menu">
         <ul>
             <li><a href="#">Leagues</a>
@@ -81,6 +59,4 @@
             </tbody>
         </table>
     </div>
-</body>
-</html>
 {% endblock %}

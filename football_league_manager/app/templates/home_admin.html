@@ -1,56 +1,7 @@
 <!-- templates/home_admin.html -->
-{% extends "base.html" %}
+{% extends "base_admin.html" %}
 
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/admin_style.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
-    <!-- Flash messages section -->
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-                <div class="flash flash-{{ category }}">{{ message }}</div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
-    <div class="header">
-        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="System Logo" class="logo">
-        <h1>Welcome to the Football League Manager!</h1>
-    </div>
-    <div class="admin-menu">
-        <ul>
-            <li><a href="#">Leagues</a>
-                <ul class="dropdown">
-                    <li><a href="{{ url_for('main.manage_leagues') }}">Manage Leagues</a></li>
-                    <li><a href="{{ url_for('main.create_league') }}">Add New League</a></li>
-                </ul>
-            </li>
-            <li><a href="#">Teams</a>
-                <ul class="dropdown">
-                    <li><a href="#">Manage Teams</a></li>
-                </ul>
-            </li>
-            <li><a href="#">Profiles</a>
-                <ul class="dropdown">
-                    <li><a href="#">Manage Profiles</a></li>
-                </ul>
-            </li>
-            {% if current_user.is_authenticated %}
-                <li>
-                    <form action="{{ url_for('auth.logout') }}" method="post" style="float: right;">
-                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                        <button type="submit" class="logout-button">Logout</button>
-                    </form>
-                </li>
-            {% endif %}             
-        </ul>
-    </div>
-</body>
-</html>
+<title>Admin Dashboard</title>
+
 {% endblock %}

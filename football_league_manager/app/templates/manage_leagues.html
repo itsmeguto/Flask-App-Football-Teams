@@ -1,107 +1,54 @@
-{% extends "base.html" %}
+{% extends "base_admin.html" %}
 
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Manage League</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <!-- Include FontAwesome for icons if needed -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-</head>
-<body>
-    <!-- Flash messages section -->
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-                <div class="flash flash-{{ category }}">{{ message }}</div>
+<div class="content">
+    <table class="beautiful-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Country</th>
+                <th>Date of Foundation</th>
+                <th>Number of Teams</th>
+                <th>Level on Pyramid</th>
+                <th>Current Champion</th>
+                <th>Most Champions</th>
+                <th>Most Appearances</th>
+                <th>Top Scorer</th>
+                <th>Logo</th>
+                <!-- Other headers -->
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for league in leagues %}
+            <tr>
+                <td>{{ league.name }}</td>
+                <td>{{ league.country }}</td>
+                <td>{{ league.date_of_foundation }}</td>
+                <td>{{ league.number_of_teams }}</td>
+                <td>{{ league.level_on_pyramid }}</td>
+                <td>{{ league.current_champion }}</td>
+                <td>{{ league.most_champions }}</td>
+                <td>{{ league.most_appearances }}</td>
+                <td>{{ league.top_scorer }}</td>
+                <td>
+                    {% if league.logo %}
+                        <img src="{{ url_for('static', filename=league.logo) }}" alt="League Logo" style="width: 50px; height: 50px;">
+                    {% else %}
+                        No Logo
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ url_for('main.update_league', league_id=league.id) }}" title="Edit">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="{{ url_for('main.delete_league', league_id=league.id) }}" class="delete-btn" onclick="return confirm('Are you sure?');" title="Delete">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                </td>
+            </tr>
             {% endfor %}
-        {% endif %}
-    {% endwith %}
-    <div class="header">
-        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="System Logo" class="logo">
-        <h1>Welcome to the Football League Manager!</h1>
-    </div>
-    <div class="admin-menu">
-        <ul>
-            <li><a href="#">Leagues</a>
-                <ul class="dropdown">
-                    <li><a href="{{ url_for('main.manage_leagues') }}">Manage Leagues</a></li>
-                    <li><a href="{{ url_for('main.create_league') }}">Add New League</a></li>
-                </ul>
-            </li>
-            <li><a href="#">Teams</a>
-                <ul class="dropdown">
-                    <li><a href="#">Manage Teams</a></li>
-                </ul>
-            </li>
-            <li><a href="#">Profiles</a>
-                <ul class="dropdown">
-                    <li><a href="#">Manage Profiles</a></li>
-                </ul>
-            </li>
-            {% if current_user.is_authenticated %}
-                <li>
-                    <form action="{{ url_for('auth.logout') }}" method="post" style="float: right;">
-                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                        <button type="submit" class="logout-button">Logout</button>
-                    </form>
-                </li>
-            {% endif %}                 
-        </ul>
-    </div> 
-    <div class="content">
-        <table class="beautiful-table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Country</th>
-                    <th>Date of Foundation</th>
-                    <th>Number of Teams</th>
-                    <th>Level on Pyramid</th>
-                    <th>Current Champion</th>
-                    <th>Most Champions</th>
-                    <th>Most Appearances</th>
-                    <th>Top Scorer</th>
-                    <th>Logo</th>
-                    <!-- Other headers -->
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for league in leagues %}
-                <tr>
-                    <td>{{ league.name }}</td>
-                    <td>{{ league.country }}</td>
-                    <td>{{ league.date_of_foundation }}</td>
-                    <td>{{ league.number_of_teams }}</td>
-                    <td>{{ league.level_on_pyramid }}</td>
-                    <td>{{ league.current_champion }}</td>
-                    <td>{{ league.most_champions }}</td>
-                    <td>{{ league.most_appearances }}</td>
-                    <td>{{ league.top_scorer }}</td>
-                    <td>
-                        {% if league.logo %}
-                            <img src="{{ url_for('static', filename=league.logo) }}" alt="League Logo" style="width: 50px; height: 50px;">
-                        {% else %}
-                            No Logo
-                        {% endif %}
-                    </td>
-                    <td>
-                        <a href="{{ url_for('main.update_league', league_id=league.id) }}" title="Edit">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        <a href="{{ url_for('main.delete_league', league_id=league.id) }}" class="delete-btn" onclick="return confirm('Are you sure?');" title="Delete">
-                            <i class="fas fa-trash-alt"></i>
-                        </a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</body>
-</html>
+        </tbody>
+    </table>
+</div>
 {% endblock %}
