@@ -13,4 +13,3 @@ class LeagueForm(FlaskForm):
     most_appearances = StringField('Most Appearances', validators=[DataRequired()])
     top_scorer = StringField('Top Scorer', validators=[DataRequired()])
     logo = StringField('League Logo Path', validators=[DataRequired()])
-    # Add other fields as necessary

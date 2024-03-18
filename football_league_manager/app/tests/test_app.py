@@ -3,12 +3,15 @@
 import unittest
 from flask import current_app
 from app import create_app, db
+from app import TestConfig
+from app.models import User, League
+
 
 class FlaskTestCase(unittest.TestCase):
 
     def setUp(self):
         # Set up a new app instance for each test
-        self.app = create_app('testing')
+        self.app = create_app(TestConfig)
         self.app_context = self.app.app_context()
         self.app_context.push()
         db.create_all()
